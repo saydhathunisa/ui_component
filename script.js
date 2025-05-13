@@ -49,7 +49,7 @@ document.addEventListener("click", function () {
         const textToCopy = passwordBox.innerText;
 
         navigator.clipboard.writeText(textToCopy).then(function () {
-            alert(`copy ${textToCopy}`)
+            alert("copied")
         });
     });
 
