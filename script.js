@@ -1,39 +1,57 @@
 
+document.addEventListener("click", function () {
+    const lengthInput = document.getElementById("length");
+    const uppercase = document.getElementById("Uppercaseletter");
+    const lowercase = document.getElementById("Lowercaseletter");
+    const numbers = document.getElementById("Includenumbers");
+    const symbols = document.getElementById("Includesymbols");
+    const generateBtn = document.getElementById("generateBtn");
+    const passwordDisplay = document.getElementById("password");
+    const copyButton = document.getElementById('copy-message')
 
-const button = document.getElementById("length");
-const input1 = document.getElementById("passwordLength");
-const input2 = document.getElementById("Uppercaseletter");
-const input3 = document.getElementById("Lowercaseletter");
-const input4 = document.getElementById("Includenumbers");
-const input5 = document.getElementById("Includesymbols");
-button.addEventListener("click", function () {
-    console.log({
-        Length: parseInt(input1.value),
-        Includeuppercaseletter: input2.checked,
-        Includelowercaseletter: input3.checked,
-        Includenumbers: input4.number,
-        includesymbols: input5.checked,
+
+    function generatePassword() {
+        const length = parseInt(lengthInput.value);
+        const includeUppercase = uppercase.checked;
+        const includeLowercase = lowercase.checked;
+        const includeNumbers = numbers.checked;
+        const includeSymbols = symbols.checked;
+
+        const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+        const numberChars = "0123456789";
+        const symbolChars = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+
+        let allChars = "";
+        if (includeUppercase) allChars += uppercaseChars;
+        if (includeLowercase) allChars += lowercaseChars;
+        if (includeNumbers) allChars += numberChars;
+        if (includeSymbols) allChars += symbolChars;
+
+        if (allChars === "") {
+            alert("Please select at least one character type.");
+            return;
+        }
+
+        let password = " ";
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * allChars.length);
+            password += allChars[randomIndex];
+
+        }
+
+        passwordDisplay.textContent = password;
+
+    }
+
+    copyButton.addEventListener("click", function () {
+        const passwordBox = document.getElementById("password");
+        const textToCopy = passwordBox.innerText;
+
+        navigator.clipboard.writeText(textToCopy).then(function () {
+            alert(`copy ${textToCopy}`)
+        });
     });
+
+    generateBtn.addEventListener("click", generatePassword);
 });
-
-
-
-
-
-// const button = document.getElementById('passwordgenerator');
-//const input1 = document.getElementById('passwordLength');
-//const input2 = document.getElementById('Uppercaseletter');
-//const input3 = document.getElementById('Lowercaseletter');
-//const input4 = document.getElementById('Includenumbers');
-//const input5 = document.getElementById('Includesymbols');
-
-
-//button.addEventListener('click', function () {
-//  console.log({
-//     Length: parseInt(input1.value),
-//     Includeuppercaseletter: input2.checked,
-//    Includelowercaseletter: input3.checked,
-//    Includenumbers: input4.number,
-//   includesymbols: input5.checked,
-//})
-//})
